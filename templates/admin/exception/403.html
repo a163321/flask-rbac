@@ -1,0 +1,65 @@
+{% extends "admin/base.html" %}
+
+{% block title %}404{% endblock %}
+
+{% block head %}
+    <style>
+        .panel {
+            border: solid 1px #ddd;
+            border-radius: 4px;
+        }
+
+        .margin-big-top {
+            margin-top: 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .padding-top {
+            padding-top: 10px;
+        }
+
+        h2, .h2 {
+            font-size: 20px;
+        }
+
+        .float-left {
+            float: left !important;
+        }
+
+        .float-right {
+            float: right !important;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="padding-top:50px;margin: 20px">
+        <div class="panel margin-big-top" style="background: #fff">
+            <div class="text-center">
+                <br>
+                <h2 class="padding-top">
+                    <stong>403错误！抱歉，您无权限访问此页面</stong>
+                </h2>
+                <div class="">
+                    <div class="float-left">
+                        <img src="{{ url_for('blue_admin_index.static', filename='admin/img/ds-1.gif') }}">
+                        <div class="alert"> 卧槽！权限不够呀！</div>
+                    </div>
+                    <div class="float-right">
+                        <img src="{{ url_for('blue_admin_index.static', filename='admin/img/ds-2.png') }}" width="260">
+                    </div>
+                </div>
+                <div class="padding-big">
+                    <a href="javascript:history.go(-1)" class="button bg-yellow">返回上一页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

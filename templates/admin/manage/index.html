@@ -1,0 +1,94 @@
+{% extends "admin/base.html" %}
+
+{% block title %}管理员管理{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block content %}
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title a m-cf">管理员列表</div>
+                    </div>
+                    <div class="widget-body am-fr">
+                        <!-- 工具栏 -->
+                        <div class="page_toolbar am-margin-bottom-xs am-cf">
+                            <div class="am-form-group">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <a class="am-btn am-btn-default am-btn-success"
+                                       href="/admin/manage/add">
+                                        <span class="am-icon-plus"></span> 新增
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-scrollable-horizontal am-u-sm-12">
+                            <table width="100%" class="am-table am-table-compact am-table-striped
+                         tpl-table-black am-text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th>管理员ID</th>
+                                    <th>用户名</th>
+                                    <th>角色</th>
+                                    <th>状态</th>
+                                    <th>添加时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in list %}
+                                    <tr>
+                                        <td class="am-text-middle">{{ item.id }}</td>
+                                        <td class="am-text-middle">{{ item.username }}</td>
+                                        <td class="am-text-middle">{{ item.role_names }}</td>
+                                        <td class="am-text-middle">
+                                            {% if item.status %}
+                                                <span class="am-badge am-badge-success">正常</span>
+                                            {% else %}
+                                                <span class="am-badge am-badge-warning">已禁用</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="am-text-middle">{{ item.create_time }}</td>
+                                        <td class="am-text-middle">
+                                            {% if not item.is_super %}
+                                                <div class="tpl-table-black-operation">
+                                                    <a href="/admin/manage/edit?id={{ item.id }}">
+                                                        <i class="am-icon-pencil"></i> 编辑
+                                                    </a>
+                                                    <a href="javascript:void(0);"
+                                                       class="item-delete tpl-table-black-operation-del"
+                                                       data-id="{{ item.id }}">
+                                                        <i class="am-icon-trash"></i> 删除
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4" class="am-text-center">暂无记录</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(function () {
+
+            // 删除元素
+            var url = "/admin/manage/delete";
+            $('.item-delete').delete('user_id', url, '删除后不可恢复，确定要删除吗？');
+
+        });
+    </script>
+{% endblock %}
